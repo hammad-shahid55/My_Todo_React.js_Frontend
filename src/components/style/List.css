@@ -171,3 +171,18 @@
     transform: scale(1.05);
   }
   
+  .logout-btn {
+    padding: 8px 16px;
+    margin-left: 10px;
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background: #ff7875;
+  }
+  

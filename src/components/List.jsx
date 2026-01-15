@@ -25,6 +25,14 @@ const List = () => {
     fetchTasks();
   }, []);
 
+  // Logout
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.clear(); // remove token & user info
+      navigate("/login");
+    }
+  };
+
   // Single delete
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
@@ -74,18 +82,16 @@ const List = () => {
   return (
     <div className="list-container">
       <div className="list-header">
-        <button
-          className="add-task-btn"
-          onClick={() => navigate("/add")}
-        >
+        <button className="add-task-btn" onClick={() => navigate("/add")}>
           + Add Task
         </button>
 
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+
         {selectedTasks.length > 0 && (
-          <button
-            className="delete-selected-btn"
-            onClick={handleDeleteSelected}
-          >
+          <button className="delete-selected-btn" onClick={handleDeleteSelected}>
             Delete Selected ({selectedTasks.length})
           </button>
         )}
@@ -137,17 +143,12 @@ const List = () => {
                     <td className="action-cell">
                       <button
                         className="update-btn"
-                        onClick={() =>
-                          navigate(`/update/${task._id}`, { state: task })
-                        }
+                        onClick={() => navigate(`/update/${task._id}`, { state: task })}
                       >
                         Update
                       </button>
 
-                      <button
-                        className="delete-btn"
-                        onClick={() => handleDelete(task._id)}
-                      >
+                      <button className="delete-btn" onClick={() => handleDelete(task._id)}>
                         Delete
                       </button>
                     </td>
