@@ -11,6 +11,8 @@ const buildUrl = (path = "") => {
 const request = async (path, options = {}) => {
   const { body, headers, method = "GET", ...rest } = options;
 
+  const token = localStorage.getItem("token");
+
   const init = {
     method,
     headers: {
@@ -20,18 +22,38 @@ const request = async (path, options = {}) => {
     ...rest,
   };
 
+  if (token) {
+    init.headers = {
+      ...init.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
   if (body !== undefined) {
     init.body = typeof body === "string" ? body : JSON.stringify(body);
   }
 
   const response = await fetch(buildUrl(path), init);
+  const rawBody = await response.text();
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || `Request failed: ${response.status}`);
+  let parsedBody;
+  try {
+    parsedBody = rawBody ? JSON.parse(rawBody) : null;
+  } catch {
+    parsedBody = rawBody;
   }
 
-  return response.json();
+  if (!response.ok) {
+    const errorMessage =
+      (parsedBody && typeof parsedBody === "object" && parsedBody.message) ||
+      (typeof parsedBody === "string" && parsedBody) ||
+      response.statusText ||
+      `Request failed: ${response.status}`;
+
+    throw new Error(errorMessage);
+  }
+
+  return parsedBody;
 };
 
 export { API_BASE_URL, buildUrl, request };
