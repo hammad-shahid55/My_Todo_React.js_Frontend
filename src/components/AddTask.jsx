@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { request } from "../api";
 import "./style/AddTask.css";
 
 const AddTask = () => {
@@ -19,18 +20,13 @@ const AddTask = () => {
       setLoading(true);
       setMessage("");
 
-      const response = await fetch("http://localhost:3200/add-task", {
+      const result = await request("/add-task", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+        body: {
           title,
           description,
-        }),
+        },
       });
-
-      const result = await response.json();
 
       if (result.success) {
         setMessage("Task added successfully!");

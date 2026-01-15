@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { request } from "../api";
 import "./style/List.css";
 
 const List = () => {
@@ -11,8 +12,7 @@ const List = () => {
   // Fetch all tasks
   const fetchTasks = async () => {
     try {
-      const response = await fetch("http://localhost:3200/tasks");
-      const result = await response.json();
+      const result = await request("/tasks");
       if (result.success) setTasks(result.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -29,7 +29,7 @@ const List = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
     try {
-      await fetch(`http://localhost:3200/delete-task/${id}`, { method: "DELETE" });
+      await request(`/delete-task/${id}`, { method: "DELETE" });
       setTasks((prev) => prev.filter((task) => task._id !== id));
       setSelectedTasks((prev) => prev.filter((tid) => tid !== id));
     } catch (error) {
@@ -59,10 +59,9 @@ const List = () => {
     if (!window.confirm("Delete selected tasks?")) return;
 
     try {
-      await fetch("http://localhost:3200/delete-all-tasks", {
+      await request("/delete-all-tasks", {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selectedTasks }),
+        body: { ids: selectedTasks },
       });
 
       // Remove deleted tasks from UI

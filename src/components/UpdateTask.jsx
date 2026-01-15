@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { request } from "../api";
 import "./style/AddTask.css";
 
 const UpdateTask = () => {
@@ -18,18 +19,10 @@ const UpdateTask = () => {
     try {
       setLoading(true);
 
-      const response = await fetch(
-        `http://localhost:3200/update-task/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title, description }),
-        }
-      );
-
-      const result = await response.json();
+      const result = await request(`/update-task/${id}`, {
+        method: "PUT",
+        body: { title, description },
+      });
 
       if (result.success) {
         setMessage("Task updated successfully");
