@@ -1,0 +1,173 @@
+/* Page */
+.list-container {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  /* Heading */
+  .list-heading {
+    text-align: center;
+    color: #ffffff;
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+  
+  /* Loading */
+  .loading-text {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+  /* Table Wrapper */
+  .table-wrapper {
+    max-width: 900px;
+    margin: auto;
+    overflow-x: auto;
+  }
+  
+  /* Table */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+  }
+  
+  /* Head */
+  .task-table thead {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  
+  .task-table th,
+  .task-table td {
+    padding: 14px 16px;
+    text-align: left;
+  }
+  
+  .task-table th {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  /* Rows */
+  .task-table tbody tr {
+    transition: background 0.3s ease;
+  }
+  
+  .task-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
+  /* No Data */
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.85;
+  }
+  
+.delete-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    background: rgba(255, 70, 70, 0.85);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background: rgba(255, 70, 70, 1);
+    transform: scale(1.05);
+  }
+
+  .action-cell {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .update-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .update-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Delete Selected Button */
+.delete-selected-btn {
+    margin-bottom: 15px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-selected-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+  
+  .delete-selected-btn:disabled {
+    background: rgba(255, 70, 70, 0.5);
+    cursor: not-allowed;
+  }
+  
+  /* Header for Add & Delete buttons */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Add Task Button */
+  .add-task-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .add-task-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Delete Selected Button */
+  .delete-selected-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-selected-btn:hover {
+    transform: scale(1.05);
+  }
+  
