@@ -11,6 +11,8 @@ const buildUrl = (path = "") => {
 const request = async (path, options = {}) => {
   const { body, headers, method = "GET", ...rest } = options;
 
+  const token = localStorage.getItem("token");
+
   const init = {
     method,
     headers: {
@@ -19,6 +21,13 @@ const request = async (path, options = {}) => {
     },
     ...rest,
   };
+
+  if (token) {
+    init.headers = {
+      ...init.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
 
   if (body !== undefined) {
     init.body = typeof body === "string" ? body : JSON.stringify(body);
