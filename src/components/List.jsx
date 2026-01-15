@@ -75,7 +75,7 @@ const List = () => {
                       <button
                         className="update-btn"
                         onClick={() =>
-                          navigate(`/edit/${task._id}`, { state: task })
+                          navigate(`/update/${task._id}`, { state: task })
                         }
                       >
                         Update

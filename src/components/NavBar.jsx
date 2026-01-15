@@ -16,7 +16,7 @@ function NavBar() {
           <NavLink to="/add">Add Task</NavLink>
         </li>
         <li>
-          <NavLink to="/edit">Edit Task</NavLink>
+          <NavLink to="/update">Update Task</NavLink>
         </li>
       </ul>
     </nav>
