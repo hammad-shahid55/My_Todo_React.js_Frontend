@@ -73,6 +73,18 @@
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 28px rgba(79, 172, 254, 0.9);
   }
+  .addtask-message {
+    text-align: center;
+    font-size: 14px;
+    color: #ffffff;
+    opacity: 0.9;
+  }
+  .addtask-message.success {
+    color: #00ff00;
+  }
+  .addtask-message.error {
+    color: #ff0000;
+  }
   
   .addtask-button:active {
     transform: scale(0.95);

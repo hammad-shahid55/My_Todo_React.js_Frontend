@@ -4,12 +4,44 @@ import "./style/AddTask.css";
 const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ title, description });
-    setTitle("");
-    setDescription("");
+
+    if (!title || !description) return;
+
+    try {
+      setLoading(true);
+      setMessage("");
+
+      const response = await fetch("http://localhost:3200/add-task", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          description,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setMessage("Task added successfully!");
+        setTitle("");
+        setDescription("");
+      } else {
+        setMessage("Failed to add task");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Server error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,8 +66,14 @@ const AddTask = () => {
           required
         />
 
-        <button type="submit" className="addtask-button">
-          +
+        {message && <p className="addtask-message">{message}</p>}
+
+        <button
+          type="submit"
+          className="addtask-button"
+          disabled={loading}
+        >
+          {loading ? "…" : "+"}
         </button>
       </form>
     </div>
