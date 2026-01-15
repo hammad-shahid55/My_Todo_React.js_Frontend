@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style/AddTask.css";
 
 const AddTask = () => {
@@ -6,6 +7,8 @@ const AddTask = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +34,13 @@ const AddTask = () => {
 
       if (result.success) {
         setMessage("Task added successfully!");
+
         setTitle("");
         setDescription("");
+
+        setTimeout(() => {
+          navigate("/");
+        }, 200);
       } else {
         setMessage("Failed to add task");
       }
