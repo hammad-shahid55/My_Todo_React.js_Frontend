@@ -1,17 +1,26 @@
-import './style/navbar.css'
-import { Link } from 'react-router-dom'
+import "./style/navbar.css";
+import { Link, NavLink } from "react-router-dom";
+
 function NavBar() {
   return (
     <nav className="navbar">
-        <div className="logo">My Todo App</div>
-        <ul className="nav-links">
-            <li><Link to="/">List</Link></li>
-            <li><Link to="/add">Add Task</Link></li>
-            <li><Link to="/edit">Edit Task</Link></li>
+      <div className="logo">📝 My Todo</div>
 
-        </ul>
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" end>
+            List
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/add">Add Task</NavLink>
+        </li>
+        <li>
+          <NavLink to="/edit">Edit Task</NavLink>
+        </li>
+      </ul>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

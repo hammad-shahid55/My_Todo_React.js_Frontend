@@ -1,24 +1,78 @@
+/* Navbar Container */
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
-    padding: 5px 10px;
-    background-color: #242424;
-    color: #ffffff;
     align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-}
-
-.nav-links li a {
-    text-decoration: none;
+    padding: 14px 40px;
+  
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.85),
+      rgba(118, 75, 162, 0.85)
+    );
+  
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
     color: #ffffff;
-}
+    letter-spacing: 0.5px;
+  }
+  
+  /* Links Container */
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Links */
+  .nav-links li a {
+    position: relative;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover Effect */
+  .nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #ffffff;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-links li a:hover {
+    color: #ffffff;
+  }
+  
+  /* Active Route */
+  .nav-links li a.active {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .nav-links li a.active::after {
+    width: 100%;
+    background: linear-gradient(90deg, #00f2fe, #4facfe);
+  }
+  
