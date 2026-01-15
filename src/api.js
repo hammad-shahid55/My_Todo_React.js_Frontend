@@ -25,13 +25,26 @@ const request = async (path, options = {}) => {
   }
 
   const response = await fetch(buildUrl(path), init);
+  const rawBody = await response.text();
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || `Request failed: ${response.status}`);
+  let parsedBody;
+  try {
+    parsedBody = rawBody ? JSON.parse(rawBody) : null;
+  } catch {
+    parsedBody = rawBody;
   }
 
-  return response.json();
+  if (!response.ok) {
+    const errorMessage =
+      (parsedBody && typeof parsedBody === "object" && parsedBody.message) ||
+      (typeof parsedBody === "string" && parsedBody) ||
+      response.statusText ||
+      `Request failed: ${response.status}`;
+
+    throw new Error(errorMessage);
+  }
+
+  return parsedBody;
 };
 
 export { API_BASE_URL, buildUrl, request };

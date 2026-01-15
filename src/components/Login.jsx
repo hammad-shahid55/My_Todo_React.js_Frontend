@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { request } from "../api"; // your API helper
+import { motion } from "framer-motion";
+import { request } from "../api";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -52,8 +53,15 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <form className="auth-form" onSubmit={handleLogin}>
-        <h2 className="auth-heading">Login</h2>
+      <motion.form
+        className="auth-form"
+        onSubmit={handleLogin}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="auth-heading">Welcome Back</h2>
+        <p className="auth-subtext">Log in to manage your tasks seamlessly.</p>
 
         <input
           type="email"
@@ -85,7 +93,7 @@ const Login = () => {
         <p className="auth-text">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
-      </form>
+      </motion.form>
     </div>
   );
 };
