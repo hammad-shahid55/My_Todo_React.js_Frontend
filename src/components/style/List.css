@@ -109,4 +109,25 @@
     transform: scale(1.05);
   }
   
+  /* Delete Selected Button */
+.delete-selected-btn {
+    margin-bottom: 15px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-selected-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+  
+  .delete-selected-btn:disabled {
+    background: rgba(255, 70, 70, 0.5);
+    cursor: not-allowed;
+  }
   
