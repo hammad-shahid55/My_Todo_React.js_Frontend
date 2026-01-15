@@ -55,7 +55,7 @@ const List = () => {
 
   // Delete multiple selected
   const handleDeleteSelected = async () => {
-    if (selectedTasks.length === 0) return alert("No tasks selected!");
+    if (selectedTasks.length === 0) return;
     if (!window.confirm("Delete selected tasks?")) return;
 
     try {
@@ -64,7 +64,6 @@ const List = () => {
         body: { ids: selectedTasks },
       });
 
-      // Remove deleted tasks from UI
       setTasks((prev) => prev.filter((task) => !selectedTasks.includes(task._id)));
       setSelectedTasks([]);
     } catch (error) {
@@ -74,82 +73,90 @@ const List = () => {
 
   return (
     <div className="list-container">
+      <div className="list-header">
+        <button
+          className="add-task-btn"
+          onClick={() => navigate("/add")}
+        >
+          + Add Task
+        </button>
+
+        {selectedTasks.length > 0 && (
+          <button
+            className="delete-selected-btn"
+            onClick={handleDeleteSelected}
+          >
+            Delete Selected ({selectedTasks.length})
+          </button>
+        )}
+      </div>
+
       <h2 className="list-heading">To Do List</h2>
 
       {loading ? (
         <p className="loading-text">Loading tasks...</p>
       ) : (
-        <>
-          <button
-            className="delete-selected-btn"
-            onClick={handleDeleteSelected}
-            disabled={selectedTasks.length === 0}
-          >
-            Delete Selected
-          </button>
+        <div className="table-wrapper">
+          <table className="task-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    onChange={handleSelectAll}
+                    checked={selectedTasks.length === tasks.length && tasks.length > 0}
+                  />
+                </th>
+                <th>S.No</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-          <div className="table-wrapper">
-            <table className="task-table">
-              <thead>
+            <tbody>
+              {tasks.length === 0 ? (
                 <tr>
-                  <th>
-                    <input
-                      type="checkbox"
-                      onChange={handleSelectAll}
-                      checked={selectedTasks.length === tasks.length && tasks.length > 0}
-                    />
-                  </th>
-                  <th>S.No</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Action</th>
+                  <td colSpan="5" className="no-data">
+                    No tasks found
+                  </td>
                 </tr>
-              </thead>
+              ) : (
+                tasks.map((task, index) => (
+                  <tr key={task._id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedTasks.includes(task._id)}
+                        onChange={() => handleSelect(task._id)}
+                      />
+                    </td>
+                    <td>{index + 1}</td>
+                    <td>{task.title || task.tittle}</td>
+                    <td>{task.description}</td>
+                    <td className="action-cell">
+                      <button
+                        className="update-btn"
+                        onClick={() =>
+                          navigate(`/update/${task._id}`, { state: task })
+                        }
+                      >
+                        Update
+                      </button>
 
-              <tbody>
-                {tasks.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="no-data">
-                      No tasks found
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(task._id)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
-                ) : (
-                  tasks.map((task, index) => (
-                    <tr key={task._id}>
-                      <td>
-                        <input
-                          type="checkbox"
-                          checked={selectedTasks.includes(task._id)}
-                          onChange={() => handleSelect(task._id)}
-                        />
-                      </td>
-                      <td>{index + 1}</td>
-                      <td>{task.title || task.tittle}</td>
-                      <td>{task.description}</td>
-                      <td className="action-cell">
-                        <button
-                          className="update-btn"
-                          onClick={() =>
-                            navigate(`/update/${task._id}`, { state: task })
-                          }
-                        >
-                          Update
-                        </button>
-
-                        <button
-                          className="delete-btn"
-                          onClick={() => handleDelete(task._id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

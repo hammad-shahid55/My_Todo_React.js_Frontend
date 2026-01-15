@@ -131,3 +131,43 @@
     cursor: not-allowed;
   }
   
+  /* Header for Add & Delete buttons */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Add Task Button */
+  .add-task-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .add-task-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Delete Selected Button */
+  .delete-selected-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-selected-btn:hover {
+    transform: scale(1.05);
+  }
+  
