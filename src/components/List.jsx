@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style/List.css";
 
 const List = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchTasks = async () => {
     try {
@@ -25,18 +27,16 @@ const List = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete?");
-    if (!confirmDelete) return;
+    if (!window.confirm("Are you sure?")) return;
 
     try {
       await fetch(`http://localhost:3200/delete-task/${id}`, {
         method: "DELETE",
       });
 
-      // Remove deleted task from UI instantly
       setTasks((prev) => prev.filter((task) => task._id !== id));
     } catch (error) {
-      console.error("Error deleting task:", error);
+      console.error("Delete error:", error);
     }
   };
 
@@ -71,7 +71,16 @@ const List = () => {
                     <td>{index + 1}</td>
                     <td>{task.title || task.tittle}</td>
                     <td>{task.description}</td>
-                    <td>
+                    <td className="action-cell">
+                      <button
+                        className="update-btn"
+                        onClick={() =>
+                          navigate(`/edit/${task._id}`, { state: task })
+                        }
+                      >
+                        Update
+                      </button>
+
                       <button
                         className="delete-btn"
                         onClick={() => handleDelete(task._id)}

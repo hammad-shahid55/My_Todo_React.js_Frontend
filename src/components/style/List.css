@@ -88,4 +88,25 @@
     background: rgba(255, 70, 70, 1);
     transform: scale(1.05);
   }
+
+  .action-cell {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .update-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .update-btn:hover {
+    transform: scale(1.05);
+  }
+  
   

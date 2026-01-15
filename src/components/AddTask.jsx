@@ -38,9 +38,9 @@ const AddTask = () => {
         setTitle("");
         setDescription("");
 
-        setTimeout(() => {
+      
           navigate("/");
-        }, 200);
+      
       } else {
         setMessage("Failed to add task");
       }
