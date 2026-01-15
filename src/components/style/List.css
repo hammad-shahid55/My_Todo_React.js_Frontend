@@ -73,3 +73,19 @@
     opacity: 0.85;
   }
   
+.delete-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    background: rgba(255, 70, 70, 0.85);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background: rgba(255, 70, 70, 1);
+    transform: scale(1.05);
+  }
+  
