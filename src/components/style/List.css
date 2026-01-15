@@ -1,0 +1,86 @@
+/* Page Background */
+.list-container {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  /* Heading */
+  .list-heading {
+    text-align: center;
+    color: #ffffff;
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+  
+  /* Grid Layout */
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+  }
+  
+  /* Task Card */
+  .task-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 14px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  }
+  
+  /* Card Content */
+  .task-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  
+  .task-card p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+  }
+  
+  /* Actions */
+  .task-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-btn {
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #ffffff;
+  }
+  
+  .edit-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .delete-btn {
+    background: rgba(255, 70, 70, 0.85);
+    color: #ffffff;
+  }
+  
+  .delete-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 70, 70, 1);
+  }
+  
