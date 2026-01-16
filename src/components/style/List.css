@@ -1,7 +1,7 @@
 /* Page */
 .list-container {
     min-height: 100vh;
-    padding: 40px;
+    padding: 40px 50px;
     background: linear-gradient(135deg, #667eea, #764ba2);
     font-family: "Segoe UI", sans-serif;
   }
@@ -10,8 +10,10 @@
   .list-heading {
     text-align: center;
     color: #ffffff;
-    font-size: 26px;
-    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Loading */
@@ -19,14 +21,15 @@
     text-align: center;
     color: #ffffff;
     font-size: 16px;
+    opacity: 0.9;
   }
   
 /* Table Wrapper */
 .table-wrapper {
-  max-width: 900px;
+  max-width: 950px;
   margin: auto;
   overflow-x: auto;
-  border-radius: 14px;
+  border-radius: 16px;
 }
   
 /* Table */
@@ -34,77 +37,97 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
-  border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   color: #ffffff;
+  overflow: hidden;
 }
 
 .task-table thead tr:first-child th:first-child {
-  border-top-left-radius: 14px;
+  border-top-left-radius: 16px;
 }
 
 .task-table thead tr:first-child th:last-child {
-  border-top-right-radius: 14px;
+  border-top-right-radius: 16px;
 }
 
 .task-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 14px;
+  border-bottom-left-radius: 16px;
 }
 
 .task-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 14px;
+  border-bottom-right-radius: 16px;
 }
   
   /* Head */
   .task-table thead {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 14px 14px 0 0;
+    background: rgba(0, 0, 0, 0.2);
   }
   
   .task-table th,
   .task-table td {
-    padding: 14px 16px;
+    padding: 16px 18px;
     text-align: left;
   }
   
   .task-table th {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.9);
   }
   
   /* Rows */
   .task-table tbody tr {
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .task-table tbody tr:last-child {
+    border-bottom: none;
   }
   
   .task-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .task-table td {
+    font-size: 14px;
+  }
+
+  .task-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4facfe;
   }
   
   /* No Data */
   .no-data {
     text-align: center;
-    padding: 20px;
-    opacity: 0.85;
+    padding: 30px;
+    opacity: 0.8;
+    font-size: 15px;
   }
   
 .delete-btn {
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 20px;
     border: none;
     cursor: pointer;
     font-size: 13px;
-    background: rgba(255, 70, 70, 0.85);
+    font-weight: 500;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #ffffff;
     transition: all 0.3s ease;
   }
   
   .delete-btn:hover {
-    background: rgba(255, 70, 70, 1);
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 65, 108, 0.4);
   }
 
   .action-cell {
@@ -113,35 +136,38 @@
   }
   
   .update-btn {
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 20px;
     border: none;
     cursor: pointer;
     font-size: 13px;
+    font-weight: 500;
     background: linear-gradient(135deg, #00f2fe, #4facfe);
     color: #ffffff;
     transition: all 0.3s ease;
   }
   
   .update-btn:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
   }
   
   /* Delete Selected Button */
 .delete-selected-btn {
-    margin-bottom: 15px;
-    padding: 8px 16px;
+    padding: 10px 22px;
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #fff;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
     transition: all 0.3s ease;
   }
   
   .delete-selected-btn:hover:not(:disabled) {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 65, 108, 0.4);
   }
   
   .delete-selected-btn:disabled {
@@ -154,53 +180,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    max-width: 950px;
+    margin: 0 auto 20px;
   }
   
   /* Add Task Button */
   .add-task-btn {
-    padding: 8px 20px;
+    padding: 10px 24px;
     background: linear-gradient(135deg, #00f2fe, #4facfe);
     color: #fff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
   }
   
   .add-task-btn:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Delete Selected Button */
-  .delete-selected-btn {
-    padding: 8px 20px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-  }
-  
-  .delete-selected-btn:hover {
-    transform: scale(1.05);
-  }
-  
-  .logout-btn {
-    padding: 8px 16px;
-    margin-left: 10px;
-    background: #ff4d4f;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .logout-btn:hover {
-    background: #ff7875;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
   }
   

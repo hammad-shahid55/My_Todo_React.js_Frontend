@@ -11,7 +11,7 @@
     background: #ffffff;
     padding: 35px 40px;
     border-radius: 16px;
-    width: 360px;
+    width: 400px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
@@ -23,28 +23,95 @@
     font-size: 26px;
     font-weight: 700;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+  }
+
+  .auth-subtext {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    color: #999;
+    font-size: 16px;
+    z-index: 1;
   }
   
   .auth-form input {
-    padding: 12px 14px;
+    width: 100%;
+    padding: 12px 14px 12px 42px;
     font-size: 15px;
     border-radius: 10px;
     border: 1px solid #ddd;
     outline: none;
     transition: 0.3s;
+    box-sizing: border-box;
   }
   
   .auth-form input:focus {
     border-color: #667eea;
     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
   }
+
+  .auth-form input.input-error {
+    border-color: #ff4d4f;
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+  }
+
+  .field-hint {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .validation-hint {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .validation-hint.error {
+    color: #ff4d4f;
+  }
+
+  .validation-hint.success {
+    color: #52c41a;
+  }
+
+  .validation-hint.weak {
+    color: #ff4d4f;
+  }
+
+  .validation-hint.medium {
+    color: #faad14;
+  }
+
+  .validation-hint.strong {
+    color: #52c41a;
+  }
   
   .password-box {
     position: relative;
+    width: 100%;
   }
   
-  .password-box span {
+  .password-box .eye-icon {
     position: absolute;
     right: 14px;
     top: 50%;
@@ -52,12 +119,17 @@
     cursor: pointer;
     color: #777;
     font-size: 18px;
+    z-index: 2;
+  }
+
+  .password-box .eye-icon:hover {
+    color: #667eea;
   }
   
   .strength {
     display: flex;
     gap: 6px;
-    margin-top: -6px;
+    margin-top: 4px;
   }
   
   .strength span {
@@ -65,6 +137,7 @@
     height: 5px;
     border-radius: 5px;
     background: #ddd;
+    transition: background 0.3s;
   }
   
   .strength.weak span:nth-child(1) {
@@ -89,6 +162,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 8px;
   }
   
   .auth-button:hover {
@@ -111,5 +185,9 @@
     color: #667eea;
     font-weight: 600;
     text-decoration: none;
+  }
+
+  .auth-text a:hover {
+    text-decoration: underline;
   }
   

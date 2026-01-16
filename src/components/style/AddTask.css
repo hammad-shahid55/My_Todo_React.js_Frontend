@@ -1,93 +1,117 @@
 /* Background */
 .addtask-container {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #667eea, #764ba2);
     font-family: "Segoe UI", sans-serif;
+    padding: 40px 20px;
   }
   
   /* Glass Card */
   .addtask-form {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    padding: 35px;
-    border-radius: 16px;
-    width: 340px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    padding: 40px;
+    border-radius: 20px;
+    width: 380px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
     animation: fadeIn 0.6s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   /* Title */
   .addtask-heading {
     text-align: center;
     color: #ffffff;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600;
+    margin-bottom: 5px;
   }
   
   /* Inputs */
   .addtask-input,
   .addtask-textarea {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 14px 16px;
     font-size: 15px;
-    border-radius: 10px;
-    border: none;
+    border-radius: 12px;
+    border: 2px solid transparent;
     outline: none;
     transition: all 0.3s ease;
   }
   
   .addtask-input:focus,
   .addtask-textarea:focus {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 2px #667eea;
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+    background: #ffffff;
+  }
+
+  .addtask-input::placeholder,
+  .addtask-textarea::placeholder {
+    color: #999;
   }
   
   /* Textarea */
   .addtask-textarea {
     resize: none;
-    height: 90px;
+    height: 100px;
   }
   
   /* Plus Button */
   .addtask-button {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: none;
     background: linear-gradient(135deg, #00f2fe, #4facfe);
     color: white;
-    font-size: 26px;
+    font-size: 28px;
     cursor: pointer;
     align-self: center;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.6);
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .addtask-button:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 12px 28px rgba(79, 172, 254, 0.9);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.6);
   }
+
   .addtask-message {
     text-align: center;
     font-size: 14px;
     color: #ffffff;
-    opacity: 0.9;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
   }
+
   .addtask-message.success {
-    color: #00ff00;
+    color: #52c41a;
+    background: rgba(82, 196, 26, 0.15);
   }
+
   .addtask-message.error {
-    color: #ff0000;
+    color: #ff4d4f;
+    background: rgba(255, 77, 79, 0.15);
   }
   
   .addtask-button:active {
     transform: scale(0.95);
+  }
+
+  .addtask-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
   
   /* Animation */
