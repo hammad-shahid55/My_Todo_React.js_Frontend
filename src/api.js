@@ -19,6 +19,7 @@ const request = async (path, options = {}) => {
       "Content-Type": "application/json",
       ...headers,
     },
+    credentials: "include",
     ...rest,
   };
 
