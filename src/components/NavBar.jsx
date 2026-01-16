@@ -3,11 +3,13 @@ import "./style/navbar.css";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { logout } from "../api";
 import ConfirmModal from "./ConfirmModal";
+import { FaUser } from "react-icons/fa";
 
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
+  const fullName = localStorage.getItem("fullName");
   const isLoggedIn = !!token;
   const isUpdatePage = location.pathname.startsWith("/update/");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -25,7 +27,14 @@ function NavBar() {
   return (
     <>
       <nav className="navbar">
-        <div className="logo"></div>
+        <div className="logo">
+          {isLoggedIn && fullName && (
+            <div className="user-greeting">
+              <FaUser className="user-icon" />
+              <span>Hello, {fullName.split(" ")[0]}</span>
+            </div>
+          )}
+        </div>
 
         <ul className="nav-links">
           {!isLoggedIn ? (

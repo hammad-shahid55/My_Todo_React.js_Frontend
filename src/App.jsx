@@ -8,6 +8,7 @@ import UpdateTask from "./components/UpdateTask";
 import List from "./components/List";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import VerifyOTP from "./components/VerifyOTP";
 
 
 const PrivateRoute = ({ children }) => {
@@ -45,6 +46,15 @@ function App() {
           element={
             <AuthRoute>
               <Signup />
+            </AuthRoute>
+          }
+        />
+
+        <Route
+          path="/verify-otp"
+          element={
+            <AuthRoute>
+              <VerifyOTP />
             </AuthRoute>
           }
         />

@@ -96,26 +96,22 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const data = await request("/signup", {
-        method: "POST",
-        body: {
-          fullName: form.fullName,
-          email: form.email,
-          password: form.password,
-        },
-      });
+        await request("/signup", {
+          method: "POST",
+          body: {
+            fullName: form.fullName,
+            email: form.email,
+            password: form.password,
+          },
+        });
 
-      toast.success("Account created successfully!");
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
-      localStorage.setItem("fullName", data.fullName);
-
-      setTimeout(() => navigate("/login"), 1500);
-    } catch (err) {
-      toast.error(err.message || "Signup failed");
-    } finally {
-      setLoading(false);
-    }
+        toast.success("OTP sent to your email!");
+        setTimeout(() => navigate("/verify-otp", { state: { email: form.email } }), 1000);
+      } catch (err) {
+        toast.error(err.message || "Signup failed");
+      } finally {
+        setLoading(false);
+      }
   };
 
   const getStrengthLabel = () => {

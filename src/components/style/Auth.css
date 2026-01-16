@@ -190,4 +190,90 @@
   .auth-text a:hover {
     text-decoration: underline;
   }
+
+  .email-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    margin: 8px 0;
+  }
+
+  .email-display .email-icon {
+    color: #667eea;
+    font-size: 16px;
+  }
+
+  .email-display span {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .otp-input {
+    width: 60px !important;
+    height: 60px;
+    text-align: center;
+    font-size: 24px !important;
+    font-weight: 700;
+    padding: 0 !important;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .otp-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  }
+
+  .resend-section {
+    margin-top: 8px;
+  }
+
+  .resend-btn {
+    background: none;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    font-size: 14px;
+    transition: opacity 0.3s;
+  }
+
+  .resend-btn:hover:not(:disabled) {
+    text-decoration: underline;
+  }
+
+  .resend-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .resend-btn .spinning {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   

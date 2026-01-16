@@ -100,4 +100,25 @@
   border-color: rgba(255, 70, 70, 0.9);
   transform: translateY(-1px);
 }
+
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 16px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.user-greeting .user-icon {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.user-greeting span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
   
