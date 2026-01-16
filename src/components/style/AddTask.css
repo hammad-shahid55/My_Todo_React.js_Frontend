@@ -9,17 +9,15 @@
 }
 
 .addtask-form {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
+  background: #ffffff;
   padding: 35px 40px;
   border-radius: 24px;
   width: 420px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 20px;
   animation: fadeIn 0.6s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0.15);
   position: relative;
 }
 
@@ -27,12 +25,13 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: #f0f2f5;
+  border: none;
+  color: #667eea;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -41,7 +40,7 @@
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: #e4e6eb;
   transform: translateX(-3px);
 }
 
@@ -71,14 +70,14 @@
 }
 
 .addtask-heading {
-  color: #ffffff;
+  color: #333;
   font-size: 26px;
   font-weight: 700;
   margin: 0;
 }
 
 .addtask-subtext {
-  color: rgba(255, 255, 255, 0.75);
+  color: #888;
   font-size: 14px;
   margin-top: 6px;
 }
@@ -90,9 +89,9 @@
 }
 
 .input-label {
-  color: #ffffff;
+  color: #555;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -101,16 +100,16 @@
 
 .input-label svg {
   font-size: 16px;
-  opacity: 0.9;
+  color: #667eea;
 }
 
 .addtask-input,
 .addtask-textarea {
-  background: rgba(255, 255, 255, 0.95);
+  background: #f5f7fa;
   padding: 14px 16px;
   font-size: 15px;
   border-radius: 12px;
-  border: 2px solid transparent;
+  border: 2px solid #e8eaed;
   outline: none;
   transition: all 0.3s ease;
   color: #333;
@@ -118,20 +117,20 @@
 
 .addtask-input:focus,
 .addtask-textarea:focus {
-  border-color: #4facfe;
-  box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.2);
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
   background: #ffffff;
 }
 
 .addtask-input.input-error,
 .addtask-textarea.input-error {
   border-color: #ff4d4f;
-  box-shadow: 0 0 0 4px rgba(255, 77, 79, 0.15);
+  box-shadow: 0 0 0 4px rgba(255, 77, 79, 0.1);
 }
 
 .addtask-input::placeholder,
 .addtask-textarea::placeholder {
-  color: #999;
+  color: #aaa;
 }
 
 .addtask-textarea {
@@ -149,7 +148,7 @@
 
 .char-count {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #999;
 }
 
 .char-count.limit {
@@ -159,12 +158,12 @@
 
 .field-hint {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.55);
+  color: #999;
 }
 
 .error-hint {
   font-size: 12px;
-  color: #ff6b6b;
+  color: #ff4d4f;
   font-weight: 500;
 }
 
@@ -178,13 +177,13 @@
 
 .addtask-message.success {
   color: #52c41a;
-  background: rgba(82, 196, 26, 0.15);
+  background: rgba(82, 196, 26, 0.1);
   border: 1px solid rgba(82, 196, 26, 0.3);
 }
 
 .addtask-message.error {
-  color: #ff6b6b;
-  background: rgba(255, 77, 79, 0.15);
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
   border: 1px solid rgba(255, 77, 79, 0.3);
 }
 

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiPlus, FiTrash2, FiEdit2, FiCheckSquare, FiSquare, FiClipboard, FiSearch } from "react-icons/fi";
 import { request } from "../api";
 import "./style/List.css";
 
@@ -7,9 +9,9 @@ const List = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  // Fetch all tasks
   const fetchTasks = async () => {
     try {
       const result = await request("/tasks");
@@ -25,9 +27,8 @@ const List = () => {
     fetchTasks();
   }, []);
 
-  // Single delete
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure?")) return;
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
     try {
       await request(`/delete-task/${id}`, { method: "DELETE" });
       setTasks((prev) => prev.filter((task) => task._id !== id));
@@ -37,26 +38,23 @@ const List = () => {
     }
   };
 
-  // Toggle selection for checkboxes
   const handleSelect = (id) => {
     setSelectedTasks((prev) =>
       prev.includes(id) ? prev.filter((tid) => tid !== id) : [...prev, id]
     );
   };
 
-  // Select all toggle
   const handleSelectAll = () => {
-    if (selectedTasks.length === tasks.length) {
+    if (selectedTasks.length === filteredTasks.length) {
       setSelectedTasks([]);
     } else {
-      setSelectedTasks(tasks.map((t) => t._id));
+      setSelectedTasks(filteredTasks.map((t) => t._id));
     }
   };
 
-  // Delete multiple selected
   const handleDeleteSelected = async () => {
     if (selectedTasks.length === 0) return;
-    if (!window.confirm("Delete selected tasks?")) return;
+    if (!window.confirm(`Delete ${selectedTasks.length} selected task(s)?`)) return;
 
     try {
       await request("/delete-all-tasks", {
@@ -71,82 +69,140 @@ const List = () => {
     }
   };
 
+  const filteredTasks = tasks.filter(
+    (task) =>
+      (task.title || task.tittle || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (task.description || "").toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="list-container">
-      <div className="list-header">
-        <button className="add-task-btn" onClick={() => navigate("/add")}>
-          + Add Task
-        </button>
-
-        {selectedTasks.length > 0 && (
-          <button className="delete-selected-btn" onClick={handleDeleteSelected}>
-            Delete Selected ({selectedTasks.length})
+      <motion.div
+        className="list-card"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="list-card-header">
+          <div className="header-left">
+            <div className="header-icon">
+              <FiClipboard />
+            </div>
+            <div>
+              <h2 className="list-heading">My Tasks</h2>
+              <p className="list-subtext">{tasks.length} task{tasks.length !== 1 ? "s" : ""} total</p>
+            </div>
+          </div>
+          <button className="add-task-btn" onClick={() => navigate("/add")}>
+            <FiPlus /> Add Task
           </button>
-        )}
-      </div>
-
-      <h2 className="list-heading">To Do List</h2>
-
-      {loading ? (
-        <p className="loading-text">Loading tasks...</p>
-      ) : (
-        <div className="table-wrapper">
-          <table className="task-table">
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    onChange={handleSelectAll}
-                    checked={selectedTasks.length === tasks.length && tasks.length > 0}
-                  />
-                </th>
-                <th>S.No</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {tasks.length === 0 ? (
-                <tr>
-                  <td colSpan="5" className="no-data">
-                    No tasks found
-                  </td>
-                </tr>
-              ) : (
-                tasks.map((task, index) => (
-                  <tr key={task._id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedTasks.includes(task._id)}
-                        onChange={() => handleSelect(task._id)}
-                      />
-                    </td>
-                    <td>{index + 1}</td>
-                    <td>{task.title || task.tittle}</td>
-                    <td>{task.description}</td>
-                    <td className="action-cell">
-                      <button
-                        className="update-btn"
-                        onClick={() => navigate(`/update/${task._id}`, { state: task })}
-                      >
-                        Update
-                      </button>
-
-                      <button className="delete-btn" onClick={() => handleDelete(task._id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
         </div>
-      )}
+
+        <div className="list-toolbar">
+          <div className="search-box">
+            <FiSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
+
+          <AnimatePresence>
+            {selectedTasks.length > 0 && (
+              <motion.button
+                className="delete-selected-btn"
+                onClick={handleDeleteSelected}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <FiTrash2 /> Delete ({selectedTasks.length})
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading tasks...</p>
+          </div>
+        ) : filteredTasks.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-icon">
+              <FiClipboard />
+            </div>
+            <h3>{searchQuery ? "No matching tasks" : "No tasks yet"}</h3>
+            <p>{searchQuery ? "Try a different search term" : "Create your first task to get started"}</p>
+            {!searchQuery && (
+              <button className="empty-add-btn" onClick={() => navigate("/add")}>
+                <FiPlus /> Create Task
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="table-header">
+              <div className="th-checkbox" onClick={handleSelectAll}>
+                {selectedTasks.length === filteredTasks.length && filteredTasks.length > 0 ? (
+                  <FiCheckSquare className="check-icon checked" />
+                ) : (
+                  <FiSquare className="check-icon" />
+                )}
+              </div>
+              <div className="th-sno">#</div>
+              <div className="th-title">Title</div>
+              <div className="th-description">Description</div>
+              <div className="th-actions">Actions</div>
+            </div>
+
+            <div className="task-list">
+              <AnimatePresence>
+                {filteredTasks.map((task, index) => (
+                  <motion.div
+                    key={task._id}
+                    className={`task-row ${selectedTasks.includes(task._id) ? "selected" : ""}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                  >
+                    <div className="td-checkbox" onClick={() => handleSelect(task._id)}>
+                      {selectedTasks.includes(task._id) ? (
+                        <FiCheckSquare className="check-icon checked" />
+                      ) : (
+                        <FiSquare className="check-icon" />
+                      )}
+                    </div>
+                    <div className="td-sno">{index + 1}</div>
+                    <div className="td-title">{task.title || task.tittle}</div>
+                    <div className="td-description">{task.description}</div>
+                    <div className="td-actions">
+                      <button
+                        className="action-btn edit-btn"
+                        onClick={() => navigate(`/update/${task._id}`, { state: task })}
+                        title="Edit"
+                      >
+                        <FiEdit2 />
+                      </button>
+                      <button
+                        className="action-btn delete-btn"
+                        onClick={() => handleDelete(task._id)}
+                        title="Delete"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </>
+        )}
+      </motion.div>
     </div>
   );
 };
