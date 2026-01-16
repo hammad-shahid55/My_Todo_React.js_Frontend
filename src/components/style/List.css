@@ -21,28 +21,46 @@
     font-size: 16px;
   }
   
-  /* Table Wrapper */
-  .table-wrapper {
-    max-width: 900px;
-    margin: auto;
-    overflow-x: auto;
-  }
+/* Table Wrapper */
+.table-wrapper {
+  max-width: 900px;
+  margin: auto;
+  overflow-x: auto;
+  border-radius: 14px;
+}
   
-  /* Table */
-  .task-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-    color: #ffffff;
-  }
+/* Table */
+.task-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.task-table thead tr:first-child th:first-child {
+  border-top-left-radius: 14px;
+}
+
+.task-table thead tr:first-child th:last-child {
+  border-top-right-radius: 14px;
+}
+
+.task-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 14px;
+}
+
+.task-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 14px;
+}
   
   /* Head */
   .task-table thead {
     background: rgba(0, 0, 0, 0.25);
+    border-radius: 14px 14px 0 0;
   }
   
   .task-table th,
