@@ -54,19 +54,19 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
   font-size: 28px;
   color: #ffffff;
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .form-icon.update {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
-  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .addtask-heading {
@@ -192,13 +192,13 @@
   padding: 14px 24px;
   border-radius: 30px;
   border: none;
-  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,7 +208,7 @@
 
 .addtask-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(79, 172, 254, 0.5);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
 }
 
 .addtask-button:active:not(:disabled) {
@@ -225,12 +225,12 @@
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .submit-btn:hover:not(:disabled) {
-  box-shadow: 0 10px 30px rgba(245, 87, 108, 0.5);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
 }
 
 .loading-spinner {
