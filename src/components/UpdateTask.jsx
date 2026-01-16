@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiFileText, FiAlignLeft, FiSave, FiArrowLeft, FiEdit3 } from "react-icons/fi";
 import { request } from "../api";
+import ConfirmModal from "./ConfirmModal";
 import "./style/AddTask.css";
 
 const UpdateTask = () => {
@@ -15,6 +16,7 @@ const UpdateTask = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
   const [touched, setTouched] = useState({});
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const getError = (field) => {
     if (!touched[field]) return null;
@@ -24,7 +26,7 @@ const UpdateTask = () => {
     return null;
   };
 
-  const handleUpdate = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setTouched({ title: true, description: true });
 
@@ -38,6 +40,12 @@ const UpdateTask = () => {
       return;
     }
 
+    setShowUpdateModal(true);
+  };
+
+  const handleConfirmUpdate = async () => {
+    setShowUpdateModal(false);
+    
     try {
       setLoading(true);
       setMessage({ text: "", type: "" });
@@ -68,7 +76,7 @@ const UpdateTask = () => {
     <div className="addtask-container">
       <motion.form
         className="addtask-form"
-        onSubmit={handleUpdate}
+        onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -144,6 +152,17 @@ const UpdateTask = () => {
           )}
         </button>
       </motion.form>
+
+      <ConfirmModal
+        isOpen={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+        onConfirm={handleConfirmUpdate}
+        type="update"
+        title="Update Task"
+        message="Are you sure you want to save these changes?"
+        confirmText="Save Changes"
+        cancelText="Cancel"
+      />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiTrash2, FiEdit2, FiCheckSquare, FiSquare, FiClipboard, FiSearch } from "react-icons/fi";
 import { request } from "../api";
+import ConfirmModal from "./ConfirmModal";
 import "./style/List.css";
 
 const List = () => {
@@ -10,6 +11,7 @@ const List = () => {
   const [loading, setLoading] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteModal, setDeleteModal] = useState({ open: false, id: null, isBulk: false });
   const navigate = useNavigate();
 
   const fetchTasks = async () => {
@@ -27,15 +29,37 @@ const List = () => {
     fetchTasks();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this task?")) return;
-    try {
-      await request(`/delete-task/${id}`, { method: "DELETE" });
-      setTasks((prev) => prev.filter((task) => task._id !== id));
-      setSelectedTasks((prev) => prev.filter((tid) => tid !== id));
-    } catch (error) {
-      console.error("Delete error:", error);
+  const handleDeleteClick = (id) => {
+    setDeleteModal({ open: true, id, isBulk: false });
+  };
+
+  const handleDeleteSelectedClick = () => {
+    if (selectedTasks.length === 0) return;
+    setDeleteModal({ open: true, id: null, isBulk: true });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (deleteModal.isBulk) {
+      try {
+        await request("/delete-all-tasks", {
+          method: "DELETE",
+          body: { ids: selectedTasks },
+        });
+        setTasks((prev) => prev.filter((task) => !selectedTasks.includes(task._id)));
+        setSelectedTasks([]);
+      } catch (error) {
+        console.error("Delete selected error:", error);
+      }
+    } else {
+      try {
+        await request(`/delete-task/${deleteModal.id}`, { method: "DELETE" });
+        setTasks((prev) => prev.filter((task) => task._id !== deleteModal.id));
+        setSelectedTasks((prev) => prev.filter((tid) => tid !== deleteModal.id));
+      } catch (error) {
+        console.error("Delete error:", error);
+      }
     }
+    setDeleteModal({ open: false, id: null, isBulk: false });
   };
 
   const handleSelect = (id) => {
@@ -49,23 +73,6 @@ const List = () => {
       setSelectedTasks([]);
     } else {
       setSelectedTasks(filteredTasks.map((t) => t._id));
-    }
-  };
-
-  const handleDeleteSelected = async () => {
-    if (selectedTasks.length === 0) return;
-    if (!window.confirm(`Delete ${selectedTasks.length} selected task(s)?`)) return;
-
-    try {
-      await request("/delete-all-tasks", {
-        method: "DELETE",
-        body: { ids: selectedTasks },
-      });
-
-      setTasks((prev) => prev.filter((task) => !selectedTasks.includes(task._id)));
-      setSelectedTasks([]);
-    } catch (error) {
-      console.error("Delete selected error:", error);
     }
   };
 
@@ -114,7 +121,7 @@ const List = () => {
             {selectedTasks.length > 0 && (
               <motion.button
                 className="delete-selected-btn"
-                onClick={handleDeleteSelected}
+                onClick={handleDeleteSelectedClick}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
@@ -190,7 +197,7 @@ const List = () => {
                       </button>
                       <button
                         className="action-btn delete-btn"
-                        onClick={() => handleDelete(task._id)}
+                        onClick={() => handleDeleteClick(task._id)}
                         title="Delete"
                       >
                         <FiTrash2 />
@@ -203,6 +210,19 @@ const List = () => {
           </>
         )}
       </motion.div>
+
+      <ConfirmModal
+        isOpen={deleteModal.open}
+        onClose={() => setDeleteModal({ open: false, id: null, isBulk: false })}
+        onConfirm={handleConfirmDelete}
+        type="delete"
+        title={deleteModal.isBulk ? "Delete Selected Tasks" : "Delete Task"}
+        message={deleteModal.isBulk 
+          ? `Are you sure you want to delete ${selectedTasks.length} selected task(s)? This action cannot be undone.`
+          : "Are you sure you want to delete this task? This action cannot be undone."}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 };
