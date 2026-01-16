@@ -93,27 +93,27 @@ const VerifyOTP = () => {
     }
   };
 
-  const handleResend = async () => {
-    if (countdown > 0) return;
+    const handleResend = async () => {
+      if (countdown > 0) return;
 
-    setResending(true);
+      setResending(true);
 
-    try {
-      await request("/resend-otp", {
-        method: "POST",
-        body: { email },
-      });
+      try {
+        const response = await request("/resend-otp", {
+          method: "POST",
+          body: { email },
+        });
 
-        toast.info("Your OTP is: 2468");
-        setOtp(["", "", "", ""]);
-        setCountdown(60);
-        inputRefs[0].current.focus();
-    } catch (err) {
-      toast.error(err.message || "Failed to resend OTP");
-    } finally {
-      setResending(false);
-    }
-  };
+          toast.info(`Your OTP is: ${response.otp}`, { autoClose: 10000 });
+          setOtp(["", "", "", ""]);
+          setCountdown(60);
+          inputRefs[0].current.focus();
+      } catch (err) {
+        toast.error(err.message || "Failed to resend OTP");
+      } finally {
+        setResending(false);
+      }
+    };
 
   if (!email) return null;
 
@@ -128,7 +128,7 @@ const VerifyOTP = () => {
       >
         <h2 className="auth-heading">Verify Your Email</h2>
           <p className="auth-subtext">
-            Your OTP is: <strong>2468</strong>
+            Enter the OTP shown in the notification
           </p>
 
         <div className="email-display">

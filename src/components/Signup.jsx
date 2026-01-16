@@ -96,7 +96,7 @@ const Signup = () => {
     setLoading(true);
 
       try {
-          await request("/signup", {
+          const response = await request("/signup", {
             method: "POST",
             body: {
               fullName: form.fullName,
@@ -105,7 +105,7 @@ const Signup = () => {
             },
           });
 
-          toast.info("Your OTP is: 2468. Enter it to verify your account.", { autoClose: 10000 });
+          toast.info(`Your OTP is: ${response.otp}. Enter it to verify your account.`, { autoClose: 10000 });
           setTimeout(() => navigate("/verify-otp", { state: { email: form.email } }), 1500);
         } catch (err) {
           toast.error(err.message || "Signup failed");
