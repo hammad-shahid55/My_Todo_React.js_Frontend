@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { request, logout } from "../api";
+import { request } from "../api";
 import "./style/List.css";
 
 const List = () => {
@@ -24,14 +24,6 @@ const List = () => {
   useEffect(() => {
     fetchTasks();
   }, []);
-
-  // Logout
-  const handleLogout = async () => {
-    if (window.confirm("Are you sure you want to logout?")) {
-      await logout();
-      navigate("/login");
-    }
-  };
 
   // Single delete
   const handleDelete = async (id) => {
@@ -84,10 +76,6 @@ const List = () => {
       <div className="list-header">
         <button className="add-task-btn" onClick={() => navigate("/add")}>
           + Add Task
-        </button>
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
         </button>
 
         {selectedTasks.length > 0 && (
