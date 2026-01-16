@@ -1,4 +1,5 @@
-const DEFAULT_BASE_URL = "http://localhost:3200";
+const DEFAULT_BASE_URL = "https://my-todo-node-js-backend.onrender.com";
+// const DEFAULT_BASE_URL = "http://localhost:3200";
 
 const rawBaseUrl = import.meta.env?.VITE_API_BASE_URL ?? DEFAULT_BASE_URL;
 const API_BASE_URL = rawBaseUrl.replace(/\/$/, "");
