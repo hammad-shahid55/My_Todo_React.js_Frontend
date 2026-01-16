@@ -104,10 +104,10 @@ const VerifyOTP = () => {
         body: { email },
       });
 
-      toast.success("New OTP sent to your email!");
-      setOtp(["", "", "", ""]);
-      setCountdown(60);
-      inputRefs[0].current.focus();
+        toast.info("Your OTP is: 2468");
+        setOtp(["", "", "", ""]);
+        setCountdown(60);
+        inputRefs[0].current.focus();
     } catch (err) {
       toast.error(err.message || "Failed to resend OTP");
     } finally {
@@ -127,9 +127,9 @@ const VerifyOTP = () => {
         transition={{ duration: 0.5 }}
       >
         <h2 className="auth-heading">Verify Your Email</h2>
-        <p className="auth-subtext">
-          We've sent a 4-digit OTP to your email
-        </p>
+          <p className="auth-subtext">
+            Your OTP is: <strong>2468</strong>
+          </p>
 
         <div className="email-display">
           <FaEnvelope className="email-icon" />

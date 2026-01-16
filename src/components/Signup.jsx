@@ -95,23 +95,23 @@ const Signup = () => {
 
     setLoading(true);
 
-    try {
-        await request("/signup", {
-          method: "POST",
-          body: {
-            fullName: form.fullName,
-            email: form.email,
-            password: form.password,
-          },
-        });
+      try {
+          await request("/signup", {
+            method: "POST",
+            body: {
+              fullName: form.fullName,
+              email: form.email,
+              password: form.password,
+            },
+          });
 
-        toast.success("OTP sent to your email!");
-        setTimeout(() => navigate("/verify-otp", { state: { email: form.email } }), 1000);
-      } catch (err) {
-        toast.error(err.message || "Signup failed");
-      } finally {
-        setLoading(false);
-      }
+          toast.info("Your OTP is: 2468. Enter it to verify your account.", { autoClose: 10000 });
+          setTimeout(() => navigate("/verify-otp", { state: { email: form.email } }), 1500);
+        } catch (err) {
+          toast.error(err.message || "Signup failed");
+        } finally {
+          setLoading(false);
+        }
   };
 
   const getStrengthLabel = () => {
