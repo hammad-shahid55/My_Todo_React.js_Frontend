@@ -25,7 +25,7 @@ function NavBar() {
   return (
     <>
       <nav className="navbar">
-        <div className="logo">My Todo</div>
+        <div className="logo"></div>
 
         <ul className="nav-links">
           {!isLoggedIn ? (
