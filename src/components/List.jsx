@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { request } from "../api";
+import { request, logout } from "../api";
 import "./style/List.css";
 
 const List = () => {
@@ -26,9 +26,9 @@ const List = () => {
   }, []);
 
   // Logout
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (window.confirm("Are you sure you want to logout?")) {
-      localStorage.clear(); // remove token & user info
+      await logout();
       navigate("/login");
     }
   };

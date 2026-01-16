@@ -60,7 +60,7 @@ const request = async (path, options = {}) => {
 export { API_BASE_URL, buildUrl, request };
 
 export const logout = async () => {
-  const response = await request("/auth/logout", { method: "POST" });
+  const response = await request("/logout", { method: "POST" });
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
   localStorage.removeItem("fullName");
